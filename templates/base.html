@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <title>YumYum Recipes</title>
+    <!--Materialize CDN CSS & Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Google Raleway Font Thin 100-->
+    <link href='https://fonts.googleapis.com/css?family=Raleway:100' rel='stylesheet' type='text/css'>
+     <!--Google Cuprum Font-->
+    <link href='https://fonts.googleapis.com/css?family=Cuprum:400,400italic' rel='stylesheet' type='text/css'>
+    <!--Custom CSS-->
+     <link href="{{ url_for('static', filename='stylesheets/main.css') }}" type="text/css" rel="stylesheet" />
+    {% block optionalCSS%} {% endblock %}
+  </head>
+  <body>
+    <nav>
+        <a href="/" class="logo">YumYum</a>
+        <ul class="right nav-items">
+          {% if 'username' in session %}
+            <li><a href="/recipe/new">New Recipe</a></li>
+            <li><a href="/logout">Logout</a></li>
+          {% else %}
+          <li><a href="/login"><i class="material-icons">supervisor_account</i></a></li>
+          {% endif %}
+        </ul>  
+    </nav>
+    <div class="flash" style="color:orange; padding:15px;">
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<ul>
+						{% for message in messages %}
+							 <li> <strong> {{ message }} </strong> </li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			{% endwith %}
+		</div>
+    {% block content %} {% endblock %}
+    <!-- jQuery & Materialize CDN JS -->
+    <script   src="https://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    {% block optionalJS %} {% endblock %}
+  </body>
+</html>

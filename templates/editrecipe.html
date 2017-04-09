@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+ {% block content %}
+ <div class="container">
+  <section class="row">
+      <div class="col l12 m12 s12">
+      <h1 class="motto">Edit Recipe</h1>
+     <form method="post">
+         <label>Recipe Name</label>
+         <input type="text" name="name" id="name" value="{{recipe.name}}">
+         <label>Recipe description</label>
+         <input type="Text" name="description" id="description" value="{{recipe.description}}">
+         <label>ingredients</label>
+         <input type="text" name="ingredients" id="ingredients"  value="{{recipe.ingredients}}">
+         <label>instructions</label>
+         <textarea name="instructions" id="instructions">{{recipe.instructions}}</textarea>
+         <label>Select a category</label>
+         <select name="category" class="select-category">
+         <option value="0" selected>Choose your option</option>
+         {% for r in recipe_category %}
+         <option value={{r.id}}>{{r.name}}</option>
+         {% endfor %}
+         </select>
+         <div class="btn-signup"><button class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Update Recipe</button></div>
+     </form>
+     </div>
+  </section>
+ </div>
+{% endblock %}

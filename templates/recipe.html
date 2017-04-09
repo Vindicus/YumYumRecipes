@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+ {% block content %}
+ <div class="container">
+  <section class="row">
+      <div class="col l12 m12 s12">
+      <h1 class="motto">{{recipe.name}}</h1>
+      <h6 class="h6-category">Category: {{recipe.recipe_category.name}}</h6>
+          <p style="text-align:right;">Created by: {{recipe.user.name}}</p>
+          <p class="recipe-info"><span>Description:</span> {{recipe.description}}</p>
+          <p class="recipe-info"><span>Ingredients:</span> {{recipe.ingredients}}</p>
+          <p class="recipe-info"><span>Instructions:</span> {{recipe.instructions}}</p>
+          <hr>
+          {% if auth['email'] == recipe.user.email %}
+          <a class="edit" href="{{url_for('editRecipe', category_name=recipe.recipe_category.name, recipe_id=recipe.id)}}">Edit</a>
+          <a class="delete" href="{{url_for('deleteRecipe', category_name=recipe.recipe_category.name, recipe_id=recipe.id)}}">Delete</a>
+          {% endif %}
+        </div>
+    </section>
+ </div>
+{% endblock %}

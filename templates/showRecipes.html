@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+ {% block content %}
+ <div class="container">
+  <section class="row">
+    <div class="motto-box col l12 m12 s12">
+      <h1 class="motto">You Just Discovered <span class="motto-span">Recipes</span> Island</h1>
+      <h4 class="motto">Discover and share your <span class="motto-span">secret</span> sauce</h4>
+    </div>
+    <div class="col l12 m12 s12">
+      <div class="btn-signup"><a class="waves-effect waves-light btn" href="/login"><i class="material-icons left">cloud</i>Start Sharing Now</a></div>
+    </div>
+  </section>  
+  <section class="row">
+    <div class="col l12 m12 s12">
+        <p class="recent">Recently Discovered:</p>
+         <ul class="recipes-collapsible collapsible popout" data-collapsible="accordion">
+        {% for recipe in recipes: %}
+            {% if recipe.category != category %}
+              <li>
+              <div class="collapsible-header"><i class="material-icons" style="color:orange;">grade</i>{{recipe.category}}</div>
+                <div class="collapsible-body">
+               <div class="discovery-box">
+                <a class="view" href="{{url_for('showCategory', category_name=recipe.category)}}"> View all recipes</a>
+            {% endif %}
+                <h6 class="recipe-name">{{recipe.recipe}}</h6>
+                <p class="recipe-description">Description: {{recipe.description}}</p>
+          {% set category = recipe.category %}
+        {% endfor %}
+            </div>
+              </div>
+          </li>
+        </ul>
+  </section>
+</div>
+{% endblock %}
